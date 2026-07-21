@@ -45,7 +45,7 @@ INT_PTR CALLBACK MyDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
         TheBrowser.Create(__uuidof(SHDocVw::WebBrowser), hDlg, rc);
 
         // Query the browser's own interface and use it
-        SHDocVw::IWebBrowser2Ptr(TheBrowser)->Navigate(L"https://cisco.com/");
+        SHDocVw::IWebBrowser2Ptr(TheBrowser.GetObject())->Navigate(L"https://cisco.com/");
         return 1;
     case WM_DESTROY:
         TheBrowser.Destroy();

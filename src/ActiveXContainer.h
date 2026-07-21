@@ -51,17 +51,6 @@ public:
 	/// </summary>
 	const IOleObjectPtr& GetObject() const noexcept { return m_Object; }
 
-	/// <summary>
-	/// The interface of the contained ActiveX control. Feel free to query it for the control's
-	/// real automation interface.
-	/// </summary>
-	operator IOleObject* () const noexcept { return m_Object; }
-
-	/// <summary>
-	/// Quick check if the control was created.
-	/// </summary>
-	operator bool() const noexcept { return (bool)m_Object; }
-
 	/// <returns>The window handle of the the contained control, NULL if there isn't one</returns>
 	HWND GetControlHWND() noexcept;
 
