@@ -62,6 +62,9 @@ public:
 	/// </summary>
 	operator bool() const noexcept { return (bool)m_Object; }
 
+	/// <returns>The window handle of the the contained control, NULL if there isn't one</returns>
+	HWND GetControlHWND() noexcept;
+
 	/// <summary>
 	/// Finds a connection point for the given IID, connects the provided sink to it,
 	/// returns the cookie. The connection point is not automatically disconnected at

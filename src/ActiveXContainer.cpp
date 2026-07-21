@@ -39,6 +39,19 @@ void CActiveXContainer::Create(REFCLSID clsid, HWND hParentWnd, const RECT &rc)
 	}
 }
 
+HWND CActiveXContainer::GetControlHWND() noexcept
+{
+	if (m_Object)
+	{
+		HWND hWnd;
+		IOleWindowPtr ow;
+		if (SUCCEEDED(m_Object.QueryInterface(__uuidof(IOleWindow), &ow)) &&
+			SUCCEEDED(ow->GetWindow(&hWnd)))
+			return hWnd;
+	}
+	return 0;
+}
+
 DWORD CActiveXContainer::ConnectEventSink(REFIID riid, IUnknown* pSink)
 {
 	IConnectionPointContainerPtr cpc(m_Object);
@@ -345,7 +358,7 @@ STDMETHODIMP CActiveXContainer::Invoke(
 {
 	switch (dispid)
 	{
-	case DISPID_AMBIENT_LOCALEID:
+	case DISPID_AMBIENT_LOCALEID: //Might be better to provide the LCID of the home dialog...
 		if (pvr && f == DISPATCH_PROPERTYGET)
 		{
 			pvr->vt = VT_I4;
